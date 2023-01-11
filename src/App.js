@@ -1,24 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from './components/home/Home';
+import Beer from './components/beer/Beer';
+
 
 function App() {
+
+  const [beers, setBeers] = useState([])
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true)
+      try {
+        const res = await fetch("http://localhost:3001/beers")
+        const data = await res.json()
+        // console.log(data)
+        setBeers(data)
+
+      } catch (error) {
+        setError(true)
+      }
+      setLoading(false)
+    }
+
+    getData();
+
+  }, [])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home beers={beers} setBeers={setBeers} loading={loading} />} />
+
+      <Route path="/beer/:id" element={<Beer beers={beers} setBeers={setBeers} />} />
+
+    </Routes>
   );
 }
 
