@@ -1,9 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import ReactPaginate from "react-paginate"
 
 
 function Home({ beers, loading }) {
     const [search, setSearch] = useState("")
+    const [page, setPage] = useState(1)
+
+    const handlePageClick = (data) => {
+        const pageNumber = data.selected
+        console.log(data.selected)
+
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(pageNumber)
+        // }
+
+        // fetch(`http://localhost:3001/beers`, requestOptions)
+        //     .then(res => res.json())
+        //     .then(data => console.log("edit", data))
+
+    }
+
+
 
 
     return (
@@ -31,6 +51,14 @@ function Home({ beers, loading }) {
                     )}
 
                 </div>
+            </div>
+            <div>
+                <ReactPaginate previousLabel={"Prev"}
+                    nextLabel={"Next"} breakLabel={"..."}
+                    pageCount={20}
+                    onPageChange={handlePageClick}
+                />
+
             </div>
 
         </div>
