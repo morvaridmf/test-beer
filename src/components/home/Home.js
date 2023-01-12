@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import ReactPaginate from "react-paginate"
 import Pagination from '../pagination/Pagination';
+import { useGlobalContext } from '../../Contex';
 
 
-function Home({ beers, loading, totalBeers, beersPerPage, paginate }) {
+function Home() {
+    const { loading, currentBeers } = useGlobalContext()
     const [search, setSearch] = useState("")
-
-
 
 
     return (
@@ -19,7 +18,7 @@ function Home({ beers, loading, totalBeers, beersPerPage, paginate }) {
                     {loading ? (<h1>Loading....</h1>) : (
                         <>
 
-                            {beers.length > 0 && beers.filter(beer => beer.name.toLowerCase().includes(search)).map(beer => (
+                            {currentBeers.length > 0 && currentBeers.filter(beer => beer.name.toLowerCase().includes(search)).map(beer => (
                                 <div key={beer.id}>
                                     <Link to={`/beer/${beer.id}`}>
                                         <h3>{beer.name}</h3>
@@ -37,7 +36,7 @@ function Home({ beers, loading, totalBeers, beersPerPage, paginate }) {
                 </div>
             </div>
             <div>
-                <Pagination totalBeers={totalBeers} beersPerPage={beersPerPage} paginate={paginate} />
+                <Pagination />
 
             </div>
 

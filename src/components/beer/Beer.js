@@ -1,38 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from "react-router-dom";
+import { useGlobalContext } from '../../Contex';
 
 
-function Beer({ beers }) {
+function Beer() {
+    const { beers } = useGlobalContext()
     const id = useParams().id;
     const selectedBeer = beers.find(beer => beer.id == id)
     console.log(selectedBeer)
 
-
-    // const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState(false)
-
-    // useEffect(() => {
-    //     const getData = async () => {
-    //         setLoading(true)
-    //         try {
-    //             const res = await fetch(`http://localhost:3001/beers/${id}`)
-    //             const data = await res.json()
-    //             console.log("mmm", data)
-
-    //             setBeer(data)
-
-
-
-    //         } catch (error) {
-    //             setError(true)
-    //         }
-    //         setLoading(false)
-    //     }
-
-    //     getData();
-
-
-    // }, [])
 
 
     return (

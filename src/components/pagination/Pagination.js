@@ -1,6 +1,10 @@
 import React from 'react'
+import { useGlobalContext } from '../../Contex';
 
-function Pagination({ beersPerPage, totalBeers, paginate }) {
+function Pagination() {
+    const { beersPerPage, paginate, beers } = useGlobalContext()
+    const totalBeers = beers.length
+
 
     const pageNumabers = [];
     for (let i = 1; i <= Math.ceil(totalBeers / beersPerPage); i++) {
