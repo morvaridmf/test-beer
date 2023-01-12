@@ -1,27 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import ReactPaginate from "react-paginate"
+import Pagination from '../pagination/Pagination';
 
 
-function Home({ beers, loading }) {
+function Home({ beers, loading, totalBeers, beersPerPage, paginate }) {
     const [search, setSearch] = useState("")
-    const [page, setPage] = useState(1)
-
-    const handlePageClick = (data) => {
-        const pageNumber = data.selected
-        console.log(data.selected)
-
-        // const requestOptions = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(pageNumber)
-        // }
-
-        // fetch(`http://localhost:3001/beers`, requestOptions)
-        //     .then(res => res.json())
-        //     .then(data => console.log("edit", data))
-
-    }
 
 
 
@@ -53,11 +37,7 @@ function Home({ beers, loading }) {
                 </div>
             </div>
             <div>
-                <ReactPaginate previousLabel={"Prev"}
-                    nextLabel={"Next"} breakLabel={"..."}
-                    pageCount={20}
-                    onPageChange={handlePageClick}
-                />
+                <Pagination totalBeers={totalBeers} beersPerPage={beersPerPage} paginate={paginate} />
 
             </div>
 
